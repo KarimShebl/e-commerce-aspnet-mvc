@@ -21,5 +21,8 @@ public class User : IdentityUser
 
     [NotMapped]
     public List<Product>? Products { get; set; }
+
+    [NotMapped]
+    public List<Product>? PurchasedProducts { get; set; }
 }
 

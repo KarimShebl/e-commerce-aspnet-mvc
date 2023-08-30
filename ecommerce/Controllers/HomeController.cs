@@ -2,6 +2,7 @@
 using ecommerce.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace ecommerce.Controllers
@@ -10,16 +11,24 @@ namespace ecommerce.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<User> _userManager;
+        private readonly AppDbContext Db;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<User> userManager, DbContextOptions<AppDbContext> options)
         {
             _logger = logger;
             this._userManager = userManager;
+            Db = new AppDbContext(options);
         }
 
         public IActionResult Index()
         {
             ViewBag.UserId = _userManager.GetUserId(this.User);
+            ViewBag.Type = 0;
+            foreach(var user in _userManager.Users)
+            {
+                if(user.Id == ViewBag.UserId)
+                    ViewBag.Type = user.Type;
+            }
             return View();
         }
 

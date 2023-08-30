@@ -35,6 +35,8 @@ namespace ecommerce.Models
 
             [NotMapped]
             public User? Seller { get; set; }
+
+            public bool Available { get; set; }
         }
     }
 

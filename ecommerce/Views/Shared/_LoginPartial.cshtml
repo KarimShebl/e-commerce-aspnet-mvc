@@ -7,8 +7,14 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+        ViewBag.UserId = UserManager.GetUserId(User);
+        foreach (var user in UserManager.Users)
+        {
+            if (user.Id == ViewBag.UserId)
+                ViewBag.Name = user.Name;
+        }
     <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+        <a id="manage" class="nav-link btn btn-link text-dark border-0" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@ViewBag.Name</a>
     </li>
     <li class="nav-item">
         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

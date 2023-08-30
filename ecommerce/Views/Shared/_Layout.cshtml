@@ -1,4 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@using ecommerce.Areas.Identity.Data;
+@inject UserManager<User> UserManager
+@{
+    ViewBag.UserId = UserManager.GetUserId(this.User);
+    ViewBag.Type = -1;
+    foreach (var user in UserManager.Users)
+    {
+        if (user.Id == ViewBag.UserId)
+            ViewBag.Type = user.Type;
+    }
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,7 +25,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ecommerce</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Online Store</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,8 +33,21 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a id="home-link" class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @if ((int)ViewBag.Type == 1)
+                        {
+                            <li class="nav-item">
+                                <a id="my-products-link" class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">My Products</a>
+                            </li>
+                        }
+                        else if ((int)ViewBag.Type == 0)
+                        {
+                            <li class="nav-item">
+                                <a id="purchased-products-link" class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Purchased Products</a>
+                            </li>
+                        }
+
                     </ul>
                     <!-- Use the utility classes for alignment -->
                     <div class="d-flex">
