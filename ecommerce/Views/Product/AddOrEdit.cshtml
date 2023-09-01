@@ -1,0 +1,56 @@
+﻿@using e_commerce.Data.Enums;
+@using ecommerce.Models.e_commerce.Models;
+@model Product
+@{
+    ViewData["Title"] = "AddOrEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" enctype="multipart/form-data" asp-action="Save" asp-controller="Product">
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <input name="Id" value="@Model?.Id" hidden>
+    <input Name = "SellerId" hidden value="@ViewBag.UserId">
+    <input Name = "SellerName" hidden value="@ViewBag.UserName">
+    <div class="d-flex justify-content-center flex-column align-items-center">
+        <h3 class="text-center">Add your product</h3>
+        <br />
+        <div class="form-floating mb-4" style="width: 500px;">
+            <input asp-for="Name" class="form-control" aria-required="true" placeholder="Name" />
+            <label asp-for="Name" class="form-label">Name</label>
+            <span asp-validation-for="Name" class="text-danger"/>
+        </div>
+
+        <div class="form-floating mb-4" style="width: 500px;">
+            <input asp-for="Description" class="form-control" aria-required="false" placeholder="Description" />
+            <label asp-for="Description" class="form-label">Description</label>
+        </div>
+
+        <div class="form-floating mb-4" style="width : 500px">
+            <select asp-for="Category" class="form-select">
+                @foreach (var value in Enum.GetValues(typeof(Category)))
+                {
+                    <option value="@((int)value)">@value</option>
+                }
+            </select>
+            <label asp-for="Category">Category</label>
+        </div>
+
+        <div class="form-floating mb-4" style="width: 500px;">
+            <input asp-for="Price" class="form-control" aria-required="true" placeholder="price"/>
+            <label asp-for="Price" class="form-label">Price</label>
+        </div>
+
+        <div class="mb-3" style="width: 500px;">
+            <label asp-for="Image" class="form-label">Choose the image of your product</label>
+            <input asp-for="Image" class="form-control" type="file" id="formFile">
+        </div>
+
+        <div class="form-floating mb-4" style="width: 500px;">
+            <input asp-for="Quantity" class="form-control" aria-required="true" placeholder="Quantity" />
+            <label asp-for="Quantity" class="form-label">Quantity</label>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">@ViewBag.Stat</button>
+    </div>
+</form>

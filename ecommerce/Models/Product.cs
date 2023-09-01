@@ -23,20 +23,20 @@ namespace ecommerce.Models
 
             public int Price { get; set; }
 
-            public DateTime PublishedDate { get; set; }
-
-            [NotMapped]
+            [NotMapped, Required, Display(Name = "Choose the product image")]
             public IFormFile? Image { get; set; }
 
             public string? ImageURL { get; set; }
 
-            [ForeignKey("User")]
+            [ForeignKey("User"), Required]
             public string SellerId { get; set; }
+            public string SellerName { get; set; }
 
             [NotMapped]
             public User? Seller { get; set; }
 
-            public bool Available { get; set; }
+            [Required]
+            public int Quantity { get; set; }
         }
     }
 

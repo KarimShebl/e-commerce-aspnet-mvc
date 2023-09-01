@@ -20,5 +20,5 @@ public class AppDbContext : IdentityDbContext<User>
         // Add your customizations after calling base.OnModelCreating(builder);
     }
 
-    DbSet<Product> Products { get; set; }
+    public DbSet<Product> Products { get; set; }
 }

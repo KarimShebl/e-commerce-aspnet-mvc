@@ -19,6 +19,13 @@ public class User : IdentityUser
     [Required]
     public UserType? Type { get; set; }
 
+    public string Address { get; set; }
+
+    [NotMapped]
+    public IFormFile Image { get; set; }
+
+    public string ImageURL { get; set; }
+
     [NotMapped]
     public List<Product>? Products { get; set; }
 

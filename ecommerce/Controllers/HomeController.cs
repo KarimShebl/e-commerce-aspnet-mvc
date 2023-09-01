@@ -1,5 +1,6 @@
 ﻿using ecommerce.Areas.Identity.Data;
 using ecommerce.Models;
+using ecommerce.Models.e_commerce.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,10 +25,14 @@ namespace ecommerce.Controllers
         {
             ViewBag.UserId = _userManager.GetUserId(this.User);
             ViewBag.Type = 0;
-            foreach(var user in _userManager.Users)
+            
+            ViewBag.Products = Db.Products.ToList();
+            foreach (var user in _userManager.Users)
             {
-                if(user.Id == ViewBag.UserId)
+                if (user.Id == ViewBag.UserId)
+                {
                     ViewBag.Type = user.Type;
+                }    
             }
             return View();
         }
