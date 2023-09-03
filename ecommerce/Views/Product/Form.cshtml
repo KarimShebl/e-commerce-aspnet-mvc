@@ -6,11 +6,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form method="post" enctype="multipart/form-data" asp-action="Save" asp-controller="Product">
+<form method="post" enctype="multipart/form-data" asp-route-Stat="@ViewBag.Stat" asp-action="Save" asp-controller="Product">
     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
     <input name="Id" value="@Model?.Id" hidden>
     <input Name = "SellerId" hidden value="@ViewBag.UserId">
     <input Name = "SellerName" hidden value="@ViewBag.UserName">
+    <input Name = "SellerEmail" hidden value="@ViewBag.UserEmail">
     <div class="d-flex justify-content-center flex-column align-items-center">
         <h3 class="text-center">Add your product</h3>
         <br />

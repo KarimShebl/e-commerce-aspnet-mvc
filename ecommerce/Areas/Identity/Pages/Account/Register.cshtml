@@ -13,7 +13,7 @@
             <div class="form-floating mb-3">
                 <input asp-for="Input.Name" class="form-control" autocomplete="Name" aria-required="true" placeholder="Name" />
                 <label asp-for="Input.Name">Name</label>
-                <span asp-validation-for="Input.Name" class="text-danger"></span>
+                <span asp-validation-for="Input.Name" class="text-danger"/>
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
@@ -29,6 +29,35 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Age" class="form-control" aria-required="true" placeholder="Age" />
+                <label asp-for="Input.Age">Age</label>
+                <span asp-validation-for="Input.Age" class="text-danger"/>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Biography" class="form-control" aria-required="false" placeholder="Biography" />
+                <label asp-for="Input.Biography">Biography</label>
+                <span asp-validation-for="Input.Biography" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Address" class="form-control" aria-required="true" placeholder="Address" />
+                <label asp-for="Input.Address">Address</label>
+                <span asp-validation-for="Input.Address" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Phone" class="form-control" aria-required="true" placeholder="Phone Number"/>
+                <label asp-for="Input.Phone">Phone Number</label>
+                <span asp-validation-for="Input.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <select asp-for="Input.Gender" class="form-select">
+                    @foreach (var value in Enum.GetValues(typeof(Gender)))
+                    {
+                        <option value="@((int)value)">@value</option>
+                    }
+                </select>
+                <label asp-for="Input.Gender">Gender</label>
             </div>
             <div class="form-floating mb-3">
                 <select asp-for="Input.UserType" class="form-select">

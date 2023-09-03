@@ -31,6 +31,7 @@ namespace ecommerce.Models
             [ForeignKey("User"), Required]
             public string SellerId { get; set; }
             public string SellerName { get; set; }
+            public string SellerEmail { get; set; }
 
             [NotMapped]
             public User? Seller { get; set; }

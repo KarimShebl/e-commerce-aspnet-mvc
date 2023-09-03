@@ -6,56 +6,58 @@
     <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
         @if ((int)(ViewBag.Type) == 1)
         {
-            <a asp-controller="Product" asp-action="AddOrEdit" asp-route-Stat="Add" class="btn btn-primary">Add Product</a>
+            <a asp-controller="Product" asp-action="New" asp-route-Stat="Add" class="btn btn-primary">Add Product</a>
             <br />
             <br />
         }
+
         <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
             @foreach (var ob in ViewBag.Products)
             {
                 <div class="col">
-                        <div class="card h-100 shadow-sm" style="overflow: hidden; box-shadow: 2px 2px 10px #aaaaaa !important;">
+                    <div class="card h-100 shadow-sm" style="overflow: hidden; box-shadow: 2px 2px 10px #aaaaaa !important;">
                         @if (ob.SellerId == ViewBag.UserId)
                         {
-                                <style>
-                                    .your-product-bar{
-                                        position: absolute;
-                                        top: 8%;
-                                        left: -25%;
-                                        background-color: #3178f9;
-                                        ;
-                                        width: 250px;
-                                        height: 35px;
-                                        transform: rotate(-45deg);
-                                        box-shadow: 0 3px 7px #888888;
-                                    }
-
-                                    .your-product-bar p{
-                                        color: white;
-                                        text-align: center;
-                                        padding-top: 5px;
-                                        font-weight: bold;
-                                    }
-                                </style>
-                                <div class="your-product-bar">
-                                    <p>Your Product</p>
-                                </div>
-                            }
-                            <img src="@ob.ImageURL" class="card-img-top">
-                            <div class="card-body">
-                                <div class="clearfix mb-3">
-                                    <span class="float-start badge rounded-pill bg-primary">@ob.Name</span>
-                                    <span class="float-end price-hp" style="color: #d9534f;">@ob.Price.00 EGP</span>
-                                </div>
-                                <h5 style="margin-bottom: -25px;">Category: @ob.Category</h5>
-                                <h5 style="margin-bottom: -25px;">Seller: <a href="#" style="text-decoration:none">@ob.SellerName</a></h5>
-                                <h5 style="margin-bottom: -25px;">Quantity: @ob.Quantity</h5>
-                                <p style="font-size: 14px; height: 30px; overflow: hidden;">@ob.Description</p>
-                                <div class="text-center my-4">
-                                    <a href="#" class="btn btn-warning">BUY</a>
-                                </div>
+                            <div class="your-product-bar">
+                                <p>Your Product</p>
                             </div>
+                        }
+                        <img src="@ob.ImageURL" class="card-img-top">
+                        <div class="card-body">
+                            <div class="clearfix mb-3">
+                                <span class="float-start badge rounded-pill bg-primary">@ob.Name</span>
+                                <span class="float-end price-hp" style="color: #d9534f;">@ob.Price.00 EGP</span>
+                            </div>
+                            <h5 style="margin-bottom: -25px;">Category: @ob.Category</h5>
+                            <h5 style="margin-bottom: -25px;">Seller: <a href="user/getuser/@ob.SellerId" style="text-decoration:none">@ob.SellerName</a></h5>
+                            <h5 style="margin-bottom: -25px;">Quantity: @ob.Quantity</h5>
+                            <p style="font-size: 14px; height: 30px; overflow: hidden;">@ob.Description</p>
+                            @if (ob.SellerId == ViewBag.UserId)
+                            {
+                                <div class="button-container">
+                                    <a  asp-controller="Product" asp-action="Edit" asp-route-id ="@ob.Id" asp-route-Stat="Save" class="button" style="text-decoration:none; padding: 10px 41px;">EDIT</a>
+                                    <a asp-controller="Product" asp-action="DeletePage" asp-route-id="@ob.Id" asp-route-Stat="Save" class="button delete-button" style="text-decoration:none; padding: 10px 25.5px;">DELETE</a>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <center>
+                                    <div class="button-container">
+                                        @if ((int)(ViewBag.Type) == -1)
+                                        {
+                                            <a asp-area="Identity" asp-page="/Account/Login" class="button buy-button" style="text-decoration:none; padding: 10px 40px;">BUY</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Product" asp-action="BuyPage" asp-route-id="@ob.Id" class="button buy-button" style="text-decoration:none; padding: 10px 40px;">BUY</a>
+                                        }
+                                    </div>
+                                </center>
+                                
+                            }
                         </div>
+                    </div>
                 </div>
             }
         </div>

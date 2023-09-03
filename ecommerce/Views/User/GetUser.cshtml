@@ -1,0 +1,80 @@
+﻿
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-8 mb-4 mb-lg-0">
+            <div class="card mb-3 h-7" style="border-radius: .5rem;">
+                <div class="row g-0">
+                    <div class="col-md-4 gradient-custom text-center text-white"
+                         style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                        <h1>@Model.Name</h1>
+                        <p>@Model.Biography</p>
+                        <i class="far fa-edit mb-5"></i>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body p-4">
+                            <h6>Information</h6>
+                            <hr class="mt-0 mb-4">
+                            <div class="row pt-1">
+                                <div class="col-6 mb-3">
+                                    <h6>Email</h6>
+                                    <p class="text-muted">@Model.Email</p>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <h6>Phone</h6>
+                                    <p class="text-muted">@Model.Phone</p>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <h6>Address</h6>
+                                    <p class="text-muted">@Model.Address</p>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <h6>Gender</h6>
+                                    <p class="text-muted">@Model.Gender</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+                @foreach (var ob in ViewBag.Products)
+                {
+                    if (ob.SellerId == Model.Id)
+                    {
+                        <div class="col">
+                            <div class="card h-100 shadow-sm" style="overflow: hidden; box-shadow: 2px 2px 10px #aaaaaa !important;">
+                                <img src="/@ob.ImageURL" class="card-img-top">
+                                <div class="card-body">
+                                    <div class="clearfix mb-3">
+                                        <span class="float-start badge rounded-pill bg-primary">@ob.Name</span>
+                                        <span class="float-end price-hp" style="color: #d9534f;">@ob.Price.00 EGP</span>
+                                    </div>
+                                    <h5 style="margin-bottom: -25px;">Category: @ob.Category</h5>
+                                    <h5 style="margin-bottom: -25px;">Quantity: @ob.Quantity</h5>
+                                    <p style="font-size: 14px; height: 30px; overflow: hidden;">@ob.Description</p>
+                                    @if (ob.SellerId == ViewBag.UserId)
+                                    {
+                                        <div class="button-container">
+                                            <button class="button">EDIT</button>
+                                            <button class="button delete-button">DELETE</button>
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <center>
+                                            <div class="button-container">
+                                                <button class="button buy-button">BUY</button>
+                                            </div>
+                                        </center>
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

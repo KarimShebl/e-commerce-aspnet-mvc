@@ -78,9 +78,20 @@ namespace ecommerce.Areas.Identity.Pages.Account
             public string Name { get; set; }
 
             [Required]
+            public int Age { get; set; }
+
+            [Required]
+            public Gender Gender { get; set; }
+
+            [Required]
             [Display(Name = "Type")]
             public UserType UserType { get; set; }
 
+
+            public string Phone { get; set; }
+
+            public string Biography { get; set; }
+            public string Address { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -127,6 +138,9 @@ namespace ecommerce.Areas.Identity.Pages.Account
                 var user = CreateUser();
                 user.Name = Input.Name;
                 user.Type = Input.UserType;
+                user.Address = Input.Address;
+                user.Phone = Input.Phone;
+                user.Biography = Input.Biography;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);

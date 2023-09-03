@@ -20,7 +20,7 @@ namespace ecommerce.Controllers
             Db = new AppDbContext(options);
             _webHostEnvironment = webHostEnvironment;
         }
-        public IActionResult AddOrEdit(Product product, string Stat)
+        public IActionResult New(Product product, string Stat)
         {
             ViewBag.Stat = Stat;
             ViewBag.UserID = _userManager.GetUserId(this.User);
@@ -29,13 +29,32 @@ namespace ecommerce.Controllers
                 if (user.Id == ViewBag.UserId)
                 {
                     ViewBag.UserName = user.Name;
+                    ViewBag.UserEmail = user.Email;
                 }
             }
-            return View(product);
+            ViewBag.Title = "Add your product";
+            return View("Form", product);
         }
 
+        public IActionResult Edit(int id, string Stat)
+        {
+            ViewBag.Stat = Stat;
+            ViewBag.UserID = _userManager.GetUserId(this.User);
+            Product product = Db.Products.FirstOrDefault(p => p.Id == id); 
+            foreach (var user in _userManager.Users)
+            {
+                if (user.Id == ViewBag.UserId)
+                {
+                    ViewBag.UserName = user.Name;
+                    ViewBag.UserEmail = user.Email;
+                }
+            }
+            ViewBag.Title = "Edit your product";
+            return View("Form", product);
+        }
         [HttpPost]
-        public IActionResult Save(Product product) {
+        public IActionResult Save(Product product, string Stat) {
+            ViewBag.Stat = Stat;
             if (ModelState.IsValid)
             {
                 if(product.Image != null)
@@ -53,6 +72,20 @@ namespace ecommerce.Controllers
             {
                 return View("Form", product);
             }
+        }
+
+        public IActionResult DeletePage(int id)
+        {
+            Product product = Db.Products.FirstOrDefault(x => x.Id == id);
+            return View(product);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            Product product = Db.Products.FirstOrDefault(x => x.Id == id);
+            Db.Products.Remove(product);
+            Db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

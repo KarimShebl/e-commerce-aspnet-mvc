@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ecommerce.styles.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Work+Sans:wght@200;300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
     <header>
@@ -35,19 +36,18 @@
                         <li class="nav-item">
                             <a id="home-link" class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @if ((int)ViewBag.Type != -1)
+                        {
+                            <li class="nav-item">
+                                <a id="purchased-products-link" class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Cart">Cart</a>
+                            </li>
+                        }
                         @if ((int)ViewBag.Type == 1)
                         {
                             <li class="nav-item">
-                                <a id="my-products-link" class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">My Products</a>
+                                <a id="my-products-link" class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="MyProducts">My Products</a>
                             </li>
                         }
-                        else if ((int)ViewBag.Type == 0)
-                        {
-                            <li class="nav-item">
-                                <a id="purchased-products-link" class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Purchased Products</a>
-                            </li>
-                        }
-
                     </ul>
                     <!-- Use the utility classes for alignment -->
                     <div class="d-flex">
@@ -63,7 +63,16 @@
             @RenderBody()
         </main>
     </div>
-
+    <script>
+        // Add the "active" class to the clicked link
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll(".nav-link");
+        navLinks.forEach(function (link) {
+            if (link.getAttribute("href") === currentPath) {
+                link.classList.add("active");
+            }
+        });
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

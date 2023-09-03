@@ -24,7 +24,7 @@ namespace ecommerce.Controllers
         public IActionResult Index()
         {
             ViewBag.UserId = _userManager.GetUserId(this.User);
-            ViewBag.Type = 0;
+            ViewBag.Type = -1;
             
             ViewBag.Products = Db.Products.ToList();
             foreach (var user in _userManager.Users)

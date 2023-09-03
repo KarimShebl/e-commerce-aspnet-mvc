@@ -17,19 +17,21 @@ public class User : IdentityUser
     public string? Name { get; set; }
 
     [Required]
+    public int Age { get; set; }
+
+    [Required]
+    public Gender Gender { get; set; }
+
+    [Required]
     public UserType? Type { get; set; }
 
-    public string Address { get; set; }
+    public string? Address { get; set; }
+
+    public string? Phone { get; set; }
+
+    public string? Biography { get; set; }
 
     [NotMapped]
-    public IFormFile Image { get; set; }
-
-    public string ImageURL { get; set; }
-
-    [NotMapped]
-    public List<Product>? Products { get; set; }
-
-    [NotMapped]
-    public List<Product>? PurchasedProducts { get; set; }
+    public List<Product>? Cart { get; set; }
 }
 
