@@ -22,6 +22,8 @@ namespace ecommerce.Models
             [Required]
             public Category Category { get; set; }
 
+            [Required] 
+            [Range(1, int.MaxValue,ErrorMessage ="Price must be greater than 0")]
             public int Price { get; set; }
 
             [NotMapped, Required, Display(Name = "Choose the product image")]
@@ -37,6 +39,7 @@ namespace ecommerce.Models
             public string CartId { get; set; }
 
             [Required]
+            [Range(1, int.MaxValue, ErrorMessage = "Quantity must be greater than 0")]
             public int Quantity { get; set; }
 
             public bool CartProduct { get; set; }

@@ -35,13 +35,16 @@
                 }
             }
         </div>
-        <center>
-            <br />
-            <br />
-            <p style="font-size:20px; font-weight:500">Would you like to purchase the items in your cart?</p>
-            <p style="color: #d9534f; font-size:20px; font-weight:500">Total Price : @ViewBag.Total.00 EGP</p>
-            <a asp-controller="Home" asp-action="Index" class="btn btn-primary" style="border-radius: 25px; margin-right: 15px; text-decoration:none;">BACK</a>
-            <a asp-controller="Home" asp-action="Index" class="btn btn-danger" style="border-radius: 25px; margin-right: 15px; text-decoration:none;">PURCHASE</a>
-        </center>
+        @if(ViewBag.Total >= 1)
+        {
+            <center>
+                <br />
+                <br />
+                <p style="font-size:20px; font-weight:500">Would you like to purchase the items in your cart?</p>
+                <p style="color: #d9534f; font-size:20px; font-weight:500">Total Price : @ViewBag.Total.00 EGP</p>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-primary" style="border-radius: 25px; margin-right: 15px; text-decoration:none;">BACK</a>
+                <a asp-controller="Product" asp-action="Purchase" class="btn btn-danger" style="border-radius: 25px; margin-right: 15px; text-decoration:none;">PURCHASE</a>
+            </center>
+        }
     </div>
 </main>

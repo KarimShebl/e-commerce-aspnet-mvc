@@ -17,6 +17,7 @@ public class User : IdentityUser
     public string? Name { get; set; }
 
     [Required]
+    [Range(18, 80, ErrorMessage = "Age must be between 18 - 80")]
     public int Age { get; set; }
 
     [Required]
@@ -26,6 +27,8 @@ public class User : IdentityUser
     public UserType? Type { get; set; }
 
     public string? Address { get; set; }
+
+    [RegularExpression("^\\+?[1-9][0-9]{7,14}$", ErrorMessage = "Number must be like +[Dialing code][Phone number]")]
 
     public string? Phone { get; set; }
 

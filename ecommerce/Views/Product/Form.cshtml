@@ -9,23 +9,24 @@
 <form method="post" enctype="multipart/form-data" asp-route-Stat="@ViewBag.Stat" asp-action="Save" asp-controller="Product">
     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
     <input name="Id" value="@Model?.Id" hidden>
-    <input Name = "SellerId" hidden value="@ViewBag.UserId">
-    <input Name = "SellerName" hidden value="@ViewBag.UserName">
-    <input Name = "CartId" hidden value="-1">
-    <input Name = "CartProduct" hidden value="false">
-    <input Name= "OriginalId" hidden value="-1">
+    <input Name="SellerId" hidden value="@ViewBag.UserId">
+    <input Name="SellerName" hidden value="@ViewBag.UserName">
+    <input Name="CartId" hidden value="-1">
+    <input Name="CartProduct" hidden value="false">
+    <input Name="OriginalId" hidden value="-1">
     <div class="d-flex justify-content-center flex-column align-items-center">
         <h3 class="text-center">Add your product</h3>
         <br />
         <div class="form-floating mb-4" style="width: 500px;">
             <input asp-for="Name" class="form-control" aria-required="true" placeholder="Name" />
             <label asp-for="Name" class="form-label">Name</label>
-            <span asp-validation-for="Name" class="text-danger"/>
+            <span asp-validation-for="Name" class="text-danger" />
         </div>
 
         <div class="form-floating mb-4" style="width: 500px;">
-            <input asp-for="Description" class="form-control" aria-required="false" placeholder="Description" />
+            <input asp-for="Description" class="form-control" aria-required="true" placeholder="Description" />
             <label asp-for="Description" class="form-label">Description</label>
+            <span asp-validation-for="Description" class="text-danger" />
         </div>
 
         <div class="form-floating mb-4" style="width : 500px">
@@ -39,8 +40,10 @@
         </div>
 
         <div class="form-floating mb-4" style="width: 500px;">
-            <input asp-for="Price" class="form-control" aria-required="true" placeholder="price"/>
+            <input asp-for="Price" class="form-control" aria-required="true" placeholder="price" />
             <label asp-for="Price" class="form-label">Price</label>
+            <span asp-validation-for="Price" class="text-danger" />
+
         </div>
 
         <div class="mb-3" style="width: 500px;">
@@ -51,9 +54,14 @@
         <div class="form-floating mb-4" style="width: 500px;">
             <input asp-for="Quantity" class="form-control" aria-required="true" placeholder="Quantity" />
             <label asp-for="Quantity" class="form-label">Quantity</label>
+            <span asp-validation-for="Quantity" class="text-danger" />
+
         </div>
     </div>
     <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-primary">@ViewBag.Stat</button>
     </div>
 </form>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

@@ -82,12 +82,15 @@ namespace ecommerce.Controllers
             return View(product);
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, int dist)
         {
             Product product = Db.Products.FirstOrDefault(x => x.Id == id);
             Db.Products.Remove(product);
             Db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            if(dist == 0)
+                return RedirectToAction("Index", "Home");
+            else
+                return RedirectToAction("MyProducts", "User");
         }
 
         public IActionResult BuyPage(int id)
@@ -149,6 +152,21 @@ namespace ecommerce.Controllers
                 Db.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }
+        }
+        
+        public IActionResult Purchase()
+        {
+            foreach (var p in Db.Cart)
+            {
+                ViewBag.UserID = _userManager.GetUserId(this.User);
+                if (p.CartProduct == true && p.CartId == ViewBag.UserID)
+                {
+                    Db.Products.Find(p.OriginalId).Quantity -= p.Quantity;
+                    Db.Cart.Remove(p);
+                }
+            }
+            Db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

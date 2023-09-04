@@ -26,7 +26,13 @@
             <br />
             <p style="font-size: 22px; font-weight: 400;" class="text-center">How many do you want to buy?</p>
         </div>
-        <input name="Quantity" value="1" class="form-control" placeholder="Quantity" asp-for="Quantity" />
+        <select asp-for="Quantity" class="form-select" aria-required="true" placeholder="Quantity">
+            @for (int i = 1; i <= Model.Quantity; i++)
+            {
+               <option value="@i">@i</option>
+            }
+        </select>
+        <label asp-for="Quantity" class="form-label">Quantity</label>
         <input type="hidden" name="T" id="TValue" value="0" /> <!-- Hidden input for T -->
         <br />
         <a asp-controller="Home" asp-action="Index" class="btn btn-primary" style="border-radius: 25px; margin-right: 15px; text-decoration:none;">BACK</a>
@@ -35,13 +41,13 @@
     </form>
     <script>
         document.getElementById("addToCartButton").addEventListener("click", function () {
-            document.getElementById("TValue").value = "1"; // Set T to 1
-            document.getElementById("buyForm").submit(); // Submit the form
+            document.getElementById("TValue").value = "1";
+            document.getElementById("buyForm").submit();
         });
 
         document.getElementById("buyButton").addEventListener("click", function () {
-            document.getElementById("TValue").value = "0"; // Set T to 0
-            document.getElementById("buyForm").submit(); // Submit the form
+            document.getElementById("TValue").value = "0";
+            document.getElementById("buyForm").submit();
         });
     </script>
 </div>
