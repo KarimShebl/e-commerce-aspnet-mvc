@@ -31,7 +31,5 @@ public class User : IdentityUser
 
     public string? Biography { get; set; }
 
-    [NotMapped]
-    public List<Product>? Cart { get; set; }
 }
 

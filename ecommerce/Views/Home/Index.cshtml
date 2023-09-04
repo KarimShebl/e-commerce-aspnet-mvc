@@ -14,6 +14,8 @@
         <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
             @foreach (var ob in ViewBag.Products)
             {
+                @if (ob.CartProduct == true)
+                    continue;
                 <div class="col">
                     <div class="card h-100 shadow-sm" style="overflow: hidden; box-shadow: 2px 2px 10px #aaaaaa !important;">
                         @if (ob.SellerId == ViewBag.UserId)

@@ -21,4 +21,6 @@ public class AppDbContext : IdentityDbContext<User>
     }
 
     public DbSet<Product> Products { get; set; }
+    public DbSet<Product> Cart { get; set; }
+
 }

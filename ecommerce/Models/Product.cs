@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using e_commerce.Data.Enums;
 using ecommerce.Areas.Identity.Data;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ecommerce.Models
 {
@@ -31,13 +32,16 @@ namespace ecommerce.Models
             [ForeignKey("User"), Required]
             public string SellerId { get; set; }
             public string SellerName { get; set; }
-            public string SellerEmail { get; set; }
 
-            [NotMapped]
-            public User? Seller { get; set; }
+            [ForeignKey("User"), AllowNull]
+            public string CartId { get; set; }
 
             [Required]
             public int Quantity { get; set; }
+
+            public bool CartProduct { get; set; }
+
+            public int OriginalId { get; set; }
         }
     }
 

@@ -38,5 +38,12 @@ namespace ecommerce.Controllers
             ViewBag.Products = Db.Products.ToList();
             return View();
         }
+
+        public IActionResult Cart()
+        {
+            ViewBag.UserId = _userManager.GetUserId(this.User);
+            ViewBag.Carts = Db.Cart.ToList();
+            return View();
+        }
     }
 }
