@@ -3,8 +3,16 @@
     public enum Category
     {
         Computers,
-        Labtops,
+        Laptops,
         Phones,
+        Cars,
+        Motorcycles,
         Books,
+        Devices,
+        Living,
+        Sports,
+        Toys,
+        VideoGames,
+        Watches
     }
 }

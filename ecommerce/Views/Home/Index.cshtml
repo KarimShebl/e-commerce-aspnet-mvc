@@ -7,7 +7,7 @@
     <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
         @if ((int)(ViewBag.Type) == 1)
         {
-            <a asp-controller="Product" asp-action="New" asp-route-Stat="Add" class="btn btn-primary">Add Product</a>
+            <a style="border-radius:25px" asp-controller="Product" asp-action="New" asp-route-Stat="Add" class="btn btn-primary">Add Product</a>
         }
 
         @foreach (var value in Enum.GetValues(typeof(Category)))
@@ -45,7 +45,7 @@
                                 {
                                     <div class="button-container">
                                         <a asp-controller="Product" asp-action="Edit" asp-route-id="@ob.Id" asp-route-Stat="Save" class="button" style="text-decoration:none; padding: 10px 41px;">EDIT</a>
-                                        <a asp-controller="Product" asp-action="DeletePage" asp-route-id="@ob.Id" asp-route-Stat="Save" class="button delete-button" style="text-decoration:none; padding: 10px 25.5px;">DELETE</a>
+                                        <a asp-controller="Product" asp-action="DeletePage" asp-route-id="@ob.Id" class="button delete-button" style="text-decoration:none; padding: 10px 25.5px;">DELETE</a>
                                     </div>
 
                                 }
